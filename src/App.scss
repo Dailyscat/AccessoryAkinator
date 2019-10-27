@@ -1,0 +1,21 @@
+.App {
+}
+.header {
+  color: #00000096;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(246, 232, 249, 1) 0%,
+    rgba(231, 93, 196, 0.33) 85.6%
+  );
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.header div {
+  font-family: monospace;
+  font-size: 20px;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+}
