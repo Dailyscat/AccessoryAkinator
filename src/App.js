@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.scss";
+import tracking from "./tracking/tracking";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -19,6 +20,31 @@ export default function App() {
   });
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const canvas = document.getElementById("canvas");
+  const context = canvas ? canvas.getContext("2d") : "";
+  const tracker = new tracking.ObjectTracker("face");
+  const img = new Image();
+  let filterX = 0;
+  let filterY = 0;
+  let filterWidth = 0;
+  let filterHeight = 0;
+  tracker.setInitialScale(4);
+  tracker.setStepSize(2);
+  tracker.setEdgesDensity(0.1);
+  tracking.track("#video", tracker, { camera: true });
+
+  tracker.on("track", event => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    event.data.forEach(rect => {
+      context.drawImage(
+        img,
+        rect.x + filterX * rect.width,
+        rect.y + filterY * rect.height,
+        rect.width * filterWidth,
+        rect.height * filterHeight
+      );
+    });
+  });
   return (
     <div className="App">
       <div className="header">
@@ -42,6 +68,10 @@ export default function App() {
         <BottomNavigationAction label="Home" icon={<Home />} />
         <BottomNavigationAction label="FilterList" icon={<FilterList />} />
       </BottomNavigation>
+      <div className="arBox">
+        <video id="video" preload={true} autoPlay loop muted></video>
+        <canvas id="canvas"></canvas>
+      </div>
     </div>
   );
 }

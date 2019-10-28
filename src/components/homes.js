@@ -77,9 +77,10 @@ const useStyles = makeStyles({
   }
 });
 
+const w = () => {};
+
 export default function Homes() {
   let classes = useStyles();
-
   return (
     <div className="Home">
       {earrings.map(cur => {
