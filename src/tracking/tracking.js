@@ -2775,12 +2775,15 @@ let tracking = {};
       if (!Array.isArray(opt_classifiers)) {
         opt_classifiers = [opt_classifiers];
       }
+      console.log(opt_classifiers);
 
       if (Array.isArray(opt_classifiers)) {
         opt_classifiers.forEach(function(classifier, i) {
           if (typeof classifier === "string") {
+            console.log(tracking.ViolaJones.classifiers);
             opt_classifiers[i] = tracking.ViolaJones.classifiers[classifier];
           }
+          console.log(opt_classifiers[i], i);
           if (!opt_classifiers[i]) {
             throw new Error(
               'Object classifier not valid, try `new tracking.ObjectTracker("face")`.'
