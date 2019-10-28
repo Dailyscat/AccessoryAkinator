@@ -38,16 +38,17 @@ export default function App() {
     tracking.track("#video", tracker, { camera: true });
 
     tracker.on("track", event => {
-      context.clearRect(0, 0, canvas.current.width, canvas.current.height);
-      console.log(context);
+      // context.clearRect(0, 0, canvas.current.width, canvas.current.height);
       event.data.forEach(rect => {
-        context.drawImage(
-          img,
-          rect.x + filterX * rect.width,
-          rect.y + filterY * rect.height,
-          rect.width * filterWidth,
-          rect.height * filterHeight
-        );
+        img.onload = function() {
+          context.drawImage(
+            img,
+            rect.x + filterX * rect.width,
+            rect.y + filterY * rect.height,
+            rect.width * filterWidth,
+            rect.height * filterHeight
+          );
+        };
         img.src = "./ar귀걸이.png";
       });
     });
