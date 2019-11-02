@@ -1,7 +1,7 @@
 import React, { Component, useRef, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.scss";
-import { initApp } from "./comedy-glasses/demo_comedyGlasses";
+import { initApp } from "./apps/comedyGlasses/comedyGlasses";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -55,8 +55,8 @@ export default class App extends Component {
           <BottomNavigationAction label="FilterList" icon={<FilterList />} />
         </BottomNavigation>
         <div className="arBox">
-          <video id="video" preload="i" autoPlay loop muted></video>
-          <canvas id="canvas" ref={this.canvasRef}></canvas>
+          <canvas width="1024" height="1024" id="jeeFaceFilterCanvas"></canvas>
+          <div id="jeelizFaceFilterFollow"></div>
         </div>
       </div>
     );

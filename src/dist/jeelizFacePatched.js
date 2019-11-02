@@ -1,3 +1,4 @@
+/* eslint-disable */
 import NNCDATA from './NNC.json';
 
 function pa(e, a, t) {

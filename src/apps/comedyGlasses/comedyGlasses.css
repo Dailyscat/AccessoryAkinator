@@ -1,0 +1,46 @@
+#jeelizFaceFilterFollow {
+  display: block;
+  position: absolute; z-index: 1000;
+  background-image: url('comedy-glasses.png');
+  background-size: cover;
+  height: 200px; width: 200px;
+}
+.mouthOpened {
+  
+}
+.mouthClosed {
+  
+}
+#jeeFaceFilterCanvas {
+  /* YOU SHOULD KEEP the transform: translateZ(-4000px) and the transform-style: preserve-3d;
+  OTHERWISE THE DIV WILL BE BEHIND THE CANVAS WITH IOS
+  */
+   transform: translateZ(-4000px) translate(-50%, -50%) rotateY(180deg);
+   transform-style: preserve-3d;
+}
+
+a {color: #eee; text-decoration: none}
+a:hover {color: blue;}
+body {overflow: auto; overflow-y: auto;
+    background-color: white;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: contain;
+    margin: 0px;}
+#jeeFaceFilterCanvas {
+    z-index: 10;
+    position: absolute; 
+    max-height: 100%;
+    max-width: 100%;
+    left: 50%;
+    top: 50%;
+    width: 100vmin;
+    transform: translate(-50%, -50%) rotateY(180deg);
+} 
+@media (max-width: 787px) {
+    #jeeFaceFilterCanvas {
+        right: 0px;
+        top: 60px;
+        transform: rotateY(180deg);
+    }
+}
