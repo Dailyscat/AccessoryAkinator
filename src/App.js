@@ -55,8 +55,8 @@ export default class App extends Component {
           <BottomNavigationAction label="FilterList" icon={<FilterList />} />
         </BottomNavigation>
         <div className="arBox">
-          <canvas width="1024" height="1024" id="jeeFaceFilterCanvas"></canvas>
-          <div id="jeelizFaceFilterFollow"></div>
+          <canvas id="jeeFaceFilterCanvas"></canvas>
+          <div width="300" height="300" id="jeelizFaceFilterFollow"></div>
         </div>
       </div>
     );

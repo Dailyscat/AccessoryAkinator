@@ -6,7 +6,7 @@ import "./comedyGlasses.css";
 
 //SETTINGS of this demo :
 var SETTINGS = {
-  rotationOffsetX: 0, //negative -> look upper. in radians
+  rotationOffsetX: 0.05, //negative -> look upper. in radians
   cameraFOV: 40, //in degrees, 3D camera FOV
   pivotOffsetYZ: [-0.15, -0.15], //position the rotation pivot along Y and Z axis
   detectionThreshold: 0.75, //sensibility, between 0 and 1. Less -> more sensitive
@@ -14,7 +14,7 @@ var SETTINGS = {
   mouthOpeningThreshold: 0.5, //sensibility of mouth opening, between 0 and 1
   mouthOpeningHysteresis: 0.05,
   scale: [1.3, 1.3], //scale of the DIV along horizontal and vertical axis
-  positionOffset: [0, 0.1, -0.2] //set a 3D position fofset to the div
+  positionOffset: [0.1, -0.6, -0.2] //set a 3D position fofset to the div
 };
 
 //some globalz :
@@ -146,7 +146,6 @@ function init_scene(spec) {
   var domRect = spec.canvasElement.getBoundingClientRect();
   var width = domRect.width;
   var height = domRect.height;
-
   //set DIV CSS style :
   DIV.style.position = "fixed";
   DIV.style.transformStyle = "preserve-3d";

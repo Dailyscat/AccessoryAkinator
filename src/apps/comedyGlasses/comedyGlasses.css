@@ -3,9 +3,10 @@
   position: absolute;
   z-index: 1000;
   background-image: url("earring.png");
-  background-size: cover;
-  height: 200px;
-  width: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: auto;
+  max-width: 200px;
 }
 .mouthOpened {
 }
@@ -38,17 +39,17 @@ body {
 #jeeFaceFilterCanvas {
   z-index: 10;
   position: absolute;
-  max-height: 100%;
-  max-width: 100%;
+  height: 100%;
+  width: 100%;
   left: 50%;
   top: 50%;
   width: 100vmin;
   transform: translate(-50%, -50%) rotateY(180deg);
 }
 @media (max-width: 787px) {
-  #jeeFaceFilterCanvas {
+  /* #jeeFaceFilterCanvas {
     right: 0px;
     top: 60px;
     transform: rotateY(180deg);
-  }
+  } */
 }
