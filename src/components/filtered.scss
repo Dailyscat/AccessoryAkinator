@@ -1,0 +1,54 @@
+.Home {
+  margin: 60px 0;
+
+  .root {
+    width: 100%;
+  }
+  .grow {
+    flex-grow: 1;
+  }
+  .MuiPaper-root.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #ffe1f8ad;
+  }
+  .searchBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .earringItem {
+    margin-bottom: 20px;
+    .earringInfo {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+      img {
+        max-width: 130px;
+        max-height: 200px;
+      }
+      .text {
+        width: 54%;
+
+        .name {
+          font-weight: 700;
+          font-size: 16px;
+        }
+      }
+    }
+    .btnBox {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+}

@@ -1,14 +1,22 @@
 import React, { Component, useRef, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  withRouter
+} from "react-router-dom";
 import "./App.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { Home, FilterList } from "@material-ui/icons";
+import { createBrowserHistory } from "history";
 import Homes from "./components/homes.js";
 import FitAr from "./components/fitar.js";
+import Filtered from "./components/filtered.js";
 
-export default class App extends Component {
+const appHistory = createBrowserHistory();
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,16 +53,13 @@ export default class App extends Component {
         <div className="header">
           <div>Earring Akinator</div>
         </div>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Homes fitIt={this.fitIt} />
-            </Route>
-            <Route path="/fitAR">
-              <FitAr />
-            </Route>
-          </Switch>
-        </Router>
+        <Route
+          exact
+          path="/"
+          render={() => <Homes fitIt={this.fitIt} history={appHistory} />}
+        />
+        <Route path="/filtered" render={() => <Filtered />} />
+        <Route path="/fitAR" render={() => <FitAr />} />
         <BottomNavigation
           value={this.state.bottomNavState}
           onChange={(event, newValue) => {
@@ -65,8 +70,20 @@ export default class App extends Component {
           showLabels
           className="bottomBtnBox"
         >
-          <BottomNavigationAction label="Home" icon={<Home />} />
-          <BottomNavigationAction label="FilterList" icon={<FilterList />} />
+          <BottomNavigationAction
+            label="Home"
+            icon={<Home />}
+            onClick={() => {
+              this.props.history.push("/");
+            }}
+          />
+          <BottomNavigationAction
+            label="FilterList"
+            icon={<FilterList />}
+            onClick={() => {
+              this.props.history.push("/filtered");
+            }}
+          />
         </BottomNavigation>
         {/* {this.state.fitItOn ? (
           <div className="arBox">
@@ -80,3 +97,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default withRouter(App);
