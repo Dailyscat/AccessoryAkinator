@@ -6,13 +6,14 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { Home, FilterList } from "@material-ui/icons";
 import Homes from "./components/homes.js";
-import { initApp } from "./apps/comedyGlasses/comedyGlasses";
+import FitAr from "./components/fitar.js";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fitItOn: false
+      fitItOn: false,
+      bottomNavState: 0
     };
     this.canvasRef = React.createRef();
   }
@@ -33,14 +34,9 @@ export default class App extends Component {
   }
 
   fitIt = () => {
-    this.setState(
-      {
-        fitItOn: !this.state.fitItOn
-      },
-      () => {
-        initApp();
-      }
-    );
+    this.setState({
+      fitItOn: !this.state.fitItOn
+    });
   };
 
   render() {
@@ -54,27 +50,32 @@ export default class App extends Component {
             <Route exact path="/">
               <Homes fitIt={this.fitIt} />
             </Route>
+            <Route path="/fitAR">
+              <FitAr />
+            </Route>
           </Switch>
         </Router>
         <BottomNavigation
-          // value={value}
-          // onChange={(event, newValue) => {
-          //   setValue(newValue);
-          // }}
+          value={this.state.bottomNavState}
+          onChange={(event, newValue) => {
+            this.setState({
+              bottomNavState: newValue
+            });
+          }}
           showLabels
           className="bottomBtnBox"
         >
           <BottomNavigationAction label="Home" icon={<Home />} />
           <BottomNavigationAction label="FilterList" icon={<FilterList />} />
         </BottomNavigation>
-        {this.state.fitItOn ? (
+        {/* {this.state.fitItOn ? (
           <div className="arBox">
             <canvas id="jeeFaceFilterCanvas"></canvas>
             <div width="300" height="300" id="jeelizFaceFilterFollow"></div>
           </div>
         ) : (
           ""
-        )}
+        )} */}
       </div>
     );
   }
