@@ -1,17 +1,19 @@
 import React, { Component, useRef, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.scss";
-import { initApp } from "./apps/comedyGlasses/comedyGlasses";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { Home, FilterList } from "@material-ui/icons";
 import Homes from "./components/homes.js";
+import { initApp } from "./apps/comedyGlasses/comedyGlasses";
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      fitItOn: false
+    };
     this.canvasRef = React.createRef();
   }
   // useEffect(() => {
@@ -27,8 +29,19 @@ export default class App extends Component {
   // const [value, setValue] = React.useState(0);
 
   componentDidMount() {
-    initApp();
+    // initApp();
   }
+
+  fitIt = () => {
+    this.setState(
+      {
+        fitItOn: !this.state.fitItOn
+      },
+      () => {
+        initApp();
+      }
+    );
+  };
 
   render() {
     return (
@@ -39,7 +52,7 @@ export default class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/">
-              <Homes />
+              <Homes fitIt={this.fitIt} />
             </Route>
           </Switch>
         </Router>
@@ -54,10 +67,14 @@ export default class App extends Component {
           <BottomNavigationAction label="Home" icon={<Home />} />
           <BottomNavigationAction label="FilterList" icon={<FilterList />} />
         </BottomNavigation>
-        <div className="arBox">
-          <canvas id="jeeFaceFilterCanvas"></canvas>
-          <div width="300" height="300" id="jeelizFaceFilterFollow"></div>
-        </div>
+        {this.state.fitItOn ? (
+          <div className="arBox">
+            <canvas id="jeeFaceFilterCanvas"></canvas>
+            <div width="300" height="300" id="jeelizFaceFilterFollow"></div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

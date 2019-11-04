@@ -79,7 +79,7 @@ const useStyles = makeStyles({
 
 const w = () => {};
 
-export default function Homes() {
+export default function Homes(props) {
   let classes = useStyles();
   return (
     <div className="Home">
@@ -119,6 +119,9 @@ export default function Homes() {
                 color="default"
                 className={classes.fitIt}
                 startIcon={<MoodIcon />}
+                onClick={() => {
+                  props.fitIt();
+                }}
               >
                 착용하기
               </Button>
