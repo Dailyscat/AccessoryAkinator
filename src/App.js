@@ -23,17 +23,6 @@ class App extends Component {
     };
     this.canvasRef = React.createRef();
   }
-  // useEffect(() => {
-  //   const context = canvas.current.getContext("2d");
-  //   context.save();
-  //   const img = new Image();
-  //   img.src = "./ar귀걸이.png";
-  //   let filterX = 0;
-  //   let filterY = 0;
-  //   let filterWidth = 0;
-  //   let filterHeight = 0;
-  // });
-  // const [value, setValue] = React.useState(0);
 
   componentDidMount() {
     // initApp();
