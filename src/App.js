@@ -10,12 +10,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import { Home, FilterList } from "@material-ui/icons";
-import { createBrowserHistory } from "history";
 import Homes from "./components/homes.js";
 import FitAr from "./components/fitar.js";
 import Filtered from "./components/filtered.js";
 
-const appHistory = createBrowserHistory();
 class App extends Component {
   constructor(props) {
     super(props);
@@ -53,11 +51,7 @@ class App extends Component {
         <div className="header">
           <div>Earring Akinator</div>
         </div>
-        <Route
-          exact
-          path="/"
-          render={() => <Homes fitIt={this.fitIt} history={appHistory} />}
-        />
+        <Route exact path="/" render={() => <Homes fitIt={this.fitIt} />} />
         <Route path="/filtered" render={() => <Filtered />} />
         <Route path="/fitAR" render={() => <FitAr />} />
         <BottomNavigation
