@@ -1,0 +1,16 @@
+﻿{
+    "UserAgent": "aws-amplify-cli/0.1.0",
+    "Version": "1.0",
+    "IdentityManager": {
+        "Default": {}
+    },
+    "AppSync": {
+        "Default": {
+            "ApiUrl": "https://z665jkawzbdwlmwuw5jykjunsq.appsync-api.ap-northeast-2.amazonaws.com/graphql",
+            "Region": "ap-northeast-2",
+            "AuthMode": "API_KEY",
+            "ApiKey": "da2-cgy2g3yeibahvlbyjgu5sgdxlq",
+            "ClientDatabasePrefix": "EarringAkinator_API_KEY"
+        }
+    }
+}
