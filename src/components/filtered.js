@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./filtered.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -8,7 +8,7 @@ import MoodIcon from "@material-ui/icons/Mood";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
 import InputBase from "@material-ui/core/InputBase";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
@@ -148,8 +148,18 @@ const styles = theme => ({
   }
 });
 
+function valuetext(value) {
+  return `${value}°C`;
+}
+
 export default function Filtered(props) {
   let classes = useStyles();
+  const [showModal, toggleModal] = useState(false);
+  const [value, setValue] = useState([1000, 15000]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <div className="Home">
       <div className={classes.root}>
@@ -173,12 +183,15 @@ export default function Filtered(props) {
       </div>
       <div className="filterNav">
         <div className="filterStandardBox">
-          <div>가격</div>
-          <div>스타일</div>
-          <div>소재</div>
+          <div onClick={() => toggleModal(!showModal)}>가격</div>
+          <div onClick={() => toggleModal(!showModal)}>스타일</div>
+          <div onClick={() => toggleModal(!showModal)}>소재</div>
         </div>
         <div className="orderBox">
-          <IconButton className={classes.button}>
+          <IconButton
+            onClick={() => toggleModal(!showModal)}
+            className={classes.button}
+          >
             <FilterListIcon />
           </IconButton>
         </div>
@@ -230,12 +243,40 @@ export default function Filtered(props) {
           </div>
         );
       })}
-      <div className="filterModal">
-        <div className="modalBackground"></div>
-        <div className="filterItemBox">
-          <div className=""></div>
+      {showModal ? (
+        <div className="filterModal" onClick={() => toggleModal(!showModal)}>
+          <div className="filterItemBox">
+            <div className="nav">
+              <div>가격</div>
+              <div>스타일</div>
+              <div>소재</div>
+            </div>
+            <div className="valueSliderBox">
+              <div className="displayValue">
+                {value[0]} ~ {value[1]}
+              </div>
+              <Slider
+                value={value}
+                min={1000}
+                step={1000}
+                max={80000}
+                className="slider"
+                onChange={handleChange}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                getAriaValueText={valuetext}
+              />
+            </div>
+            <div className="footer">
+              <Button variant="contained" color="primary">
+                Primary
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

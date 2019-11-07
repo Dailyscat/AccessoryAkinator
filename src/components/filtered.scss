@@ -71,4 +71,61 @@
       align-items: center;
     }
   }
+  .filterModal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    background-color: #716b7094;
+
+    .filterItemBox {
+      width: 100%;
+      height: 255px;
+      background: #ffffff;
+      position: absolute;
+      bottom: 56px;
+
+      .nav {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 45%;
+        margin: 15px 10px 0;
+      }
+      .valueSliderBox {
+        width: 80%;
+        margin: 40px auto 0;
+        .displayValue {
+          font-size: 25px;
+          font-weight: 600;
+          text-align: center;
+          word-spacing: 10px;
+          letter-spacing: 1px;
+        }
+        .slider {
+          color: #dea9a9;
+          margin-top: 20px;
+          .MuiSlider-rail,
+          .MuiSlider-track {
+            height: 7px;
+          }
+          .MuiSlider-thumb {
+            width: 17px;
+            height: 17px;
+            margin-top: -5px;
+          }
+        }
+      }
+      .footer {
+        margin-top: 30px;
+        margin-right: 6%;
+        text-align: right;
+        .MuiButton-containedPrimary {
+          background-color: #e8a8a8;
+        }
+      }
+    }
+  }
 }
