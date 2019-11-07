@@ -19,6 +19,26 @@
     justify-content: space-around;
     align-items: center;
   }
+  .filterNav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-top: 20px;
+    background-color: #f7eaf4;
+    .filterStandardBox {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      align-items: center;
+      width: 70%;
+    }
+    .orderBox {
+      widows: 25%;
+    }
+  }
 
   .earringItem {
     margin-bottom: 20px;

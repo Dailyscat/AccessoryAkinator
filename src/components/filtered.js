@@ -2,6 +2,7 @@ import React from "react";
 import "./filtered.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import MoodIcon from "@material-ui/icons/Mood";
 import AppBar from "@material-ui/core/AppBar";
@@ -77,6 +78,10 @@ let earrings = [
   }
 ];
 const useStyles = makeStyles({
+  root: {
+    width: "100%",
+    marginTop: 70
+  },
   goToShop: {
     color: "#ffffffdb",
     background: "#ff5fab"
@@ -86,12 +91,7 @@ const useStyles = makeStyles({
   }
 });
 
-const w = () => {};
-
 const styles = theme => ({
-  root: {
-    width: "100%"
-  },
   grow: {
     flexGrow: 1
   },
@@ -171,6 +171,18 @@ export default function Filtered(props) {
           </Toolbar>
         </AppBar>
       </div>
+      <div className="filterNav">
+        <div className="filterStandardBox">
+          <div>가격</div>
+          <div>스타일</div>
+          <div>소재</div>
+        </div>
+        <div className="orderBox">
+          <IconButton className={classes.button}>
+            <FilterListIcon />
+          </IconButton>
+        </div>
+      </div>
       {earrings.map(cur => {
         return (
           <div className="earringItem">
@@ -218,6 +230,12 @@ export default function Filtered(props) {
           </div>
         );
       })}
+      <div className="filterModal">
+        <div className="modalBackground"></div>
+        <div className="filterItemBox">
+          <div className=""></div>
+        </div>
+      </div>
     </div>
   );
 }
