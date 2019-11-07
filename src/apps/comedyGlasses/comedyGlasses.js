@@ -306,3 +306,7 @@ export function initApp() {
     } //end callbackTrack()
   }); //end JEEFACEFILTERAPI.init call
 } //end main()
+
+export function shutdownVideo() {
+  JEEFACEFILTERAPI.toggle_pause(true, true);
+}

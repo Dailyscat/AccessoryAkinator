@@ -40,9 +40,13 @@ class App extends Component {
         <div className="header">
           <div>Earring Akinator</div>
         </div>
-        <Route exact path="/" render={() => <Homes fitIt={this.fitIt} />} />
-        <Route path="/filtered" render={() => <Filtered />} />
-        <Route path="/fitAR" render={() => <FitAr />} />
+        <Route
+          exact
+          path="/"
+          render={() => <Homes {...this.props} fitIt={this.fitIt} />}
+        />
+        <Route path="/filtered" {...this.props} render={() => <Filtered />} />
+        <Route path="/fitAR" {...this.props} render={() => <FitAr />} />
         <BottomNavigation
           value={this.state.bottomNavState}
           onChange={(event, newValue) => {

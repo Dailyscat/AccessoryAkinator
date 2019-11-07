@@ -121,7 +121,7 @@ export default function Homes(props) {
                 startIcon={<MoodIcon />}
                 onClick={() => {
                   props.fitIt();
-                  window.location.href = "/fitAR";
+                  props.history.push("/fitAR");
                 }}
               >
                 착용하기
