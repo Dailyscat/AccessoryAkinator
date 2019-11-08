@@ -170,6 +170,7 @@ let defaultSettingIngredients = [
   "24k",
   "실버"
 ];
+let defaultSettingOrders = ["신상품순", "고가순", "저가순", "이름순"];
 
 export default function Filtered(props) {
   let classes = useStyles();
@@ -402,34 +403,18 @@ export default function Filtered(props) {
             )}
             {selectedModalContent === "정렬" ? (
               <div className="orderBox">
-                <div
-                  onClick={ev => {
-                    setOrderMethod(ev.currentTarget.textContent);
-                  }}
-                >
-                  신상품순
-                </div>
-                <div
-                  onClick={ev => {
-                    setOrderMethod(ev.currentTarget.textContent);
-                  }}
-                >
-                  고가순
-                </div>
-                <div
-                  onClick={ev => {
-                    setOrderMethod(ev.currentTarget.textContent);
-                  }}
-                >
-                  저가순
-                </div>
-                <div
-                  onClick={ev => {
-                    setOrderMethod(ev.currentTarget.textContent);
-                  }}
-                >
-                  이름순
-                </div>
+                {defaultSettingOrders.map(orderElem => {
+                  return (
+                    <div
+                      onClick={ev => {
+                        setOrderMethod(ev.currentTarget.textContent);
+                      }}
+                      className={orderMethod === orderElem ? "selected" : ""}
+                    >
+                      {orderElem}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               ""
