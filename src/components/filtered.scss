@@ -94,10 +94,19 @@
         align-items: center;
         width: 45%;
         margin: 15px 10px 0;
+        color: #9c9c9c;
+        .selected {
+          color: #d86464;
+          font-weight: bold;
+        }
       }
-      .valueSliderBox {
+      .valueSliderBox,
+      .stylesBox,
+      .ingredientsBox {
         width: 80%;
         margin: 40px auto 0;
+      }
+      .valueSliderBox {
         .displayValue {
           font-size: 25px;
           font-weight: 600;
@@ -107,7 +116,7 @@
         }
         .slider {
           color: #dea9a9;
-          margin-top: 20px;
+          margin-top: 22px;
           .MuiSlider-rail,
           .MuiSlider-track {
             height: 7px;
@@ -117,6 +126,25 @@
             height: 17px;
             margin-top: -5px;
           }
+        }
+      }
+      .stylesBox,
+      .ingredientsBox {
+        min-height: 80px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-content: space-around;
+        line-height: 14px;
+        div {
+          min-width: 45px;
+          text-align: center;
+          font-size: 20px;
+          margin-right: 5px;
+        }
+        .selected {
+          background: pink;
         }
       }
       .footer {

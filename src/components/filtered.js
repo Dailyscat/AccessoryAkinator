@@ -152,13 +152,66 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
+let defaultSettingStyles = [
+  "순수",
+  "우아",
+  "화려",
+  "모던",
+  "심플",
+  "트레디셔널"
+];
+let defaultSettingIngredients = [
+  "천연석",
+  "큐빅",
+  "진주",
+  "스와로브스키",
+  "탄생석",
+  "18k",
+  "24k",
+  "실버"
+];
+
 export default function Filtered(props) {
   let classes = useStyles();
   const [showModal, toggleModal] = useState(false);
   const [value, setValue] = useState([1000, 15000]);
+  const [selectedFilterElement, changeFilterElement] = useState("");
+  const [selectedStyles, setSelectStyles] = useState([]);
+  const [selectedIngredients, setSelectIngredients] = useState([]);
 
+  const toggleSelectedStyles = ev => {
+    let elemName = ev.currentTarget.textContent;
+    let copySelectedStyles = [...selectedStyles];
+    if (selectedStyles.includes(elemName)) {
+      let targetIdx = selectedStyles.indexOf(elemName);
+      copySelectedStyles.splice(targetIdx, 1);
+    } else {
+      copySelectedStyles.push(elemName);
+    }
+    setSelectStyles(copySelectedStyles);
+  };
+  const toggleSelectedIngredients = ev => {
+    let elemName = ev.currentTarget.textContent;
+    let copySelectedIngredients = [...selectedIngredients];
+    if (selectedIngredients.includes(elemName)) {
+      let targetIdx = selectedIngredients.indexOf(elemName);
+      copySelectedIngredients.splice(targetIdx, 1);
+    } else {
+      copySelectedIngredients.push(elemName);
+    }
+    setSelectIngredients(copySelectedIngredients);
+  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+  const selectedFilter = ev => {
+    let selectedFilterElement = ev.currentTarget.textContent;
+    toggleModal(!showModal);
+    changeFilterElement(selectedFilterElement);
+  };
+  const selectedFilterInModal = ev => {
+    let selectedFilterElement = ev.currentTarget.textContent;
+    changeFilterElement(selectedFilterElement);
   };
   return (
     <div className="Home">
@@ -183,9 +236,9 @@ export default function Filtered(props) {
       </div>
       <div className="filterNav">
         <div className="filterStandardBox">
-          <div onClick={() => toggleModal(!showModal)}>가격</div>
-          <div onClick={() => toggleModal(!showModal)}>스타일</div>
-          <div onClick={() => toggleModal(!showModal)}>소재</div>
+          <div onClick={selectedFilter}>가격</div>
+          <div onClick={selectedFilter}>스타일</div>
+          <div onClick={selectedFilter}>소재</div>
         </div>
         <div className="orderBox">
           <IconButton
@@ -251,26 +304,84 @@ export default function Filtered(props) {
           ></div>
           <div className="filterItemBox">
             <div className="nav">
-              <div>가격</div>
-              <div>스타일</div>
-              <div>소재</div>
-            </div>
-            <div className="valueSliderBox">
-              <div className="displayValue">
-                {value[0]} ~ {value[1]}
+              <div
+                className={selectedFilterElement === "가격" ? "selected" : ""}
+                onClick={selectedFilterInModal}
+              >
+                가격
               </div>
-              <Slider
-                value={value}
-                min={1000}
-                step={1000}
-                max={80000}
-                className="slider"
-                onChange={handleChange}
-                valueLabelDisplay="auto"
-                aria-labelledby="range-slider"
-                getAriaValueText={valuetext}
-              />
+              <div
+                className={selectedFilterElement === "스타일" ? "selected" : ""}
+                onClick={selectedFilterInModal}
+              >
+                스타일
+              </div>
+              <div
+                className={selectedFilterElement === "소재" ? "selected" : ""}
+                onClick={selectedFilterInModal}
+              >
+                소재
+              </div>
             </div>
+            {selectedFilterElement === "가격" ? (
+              <div className="valueSliderBox">
+                <div className="displayValue">
+                  {value[0]} ~ {value[1]}
+                </div>
+                <Slider
+                  value={value}
+                  min={1000}
+                  step={1000}
+                  max={80000}
+                  className="slider"
+                  onChange={handleChange}
+                  valueLabelDisplay="auto"
+                  aria-labelledby="range-slider"
+                  getAriaValueText={valuetext}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+            {selectedFilterElement === "스타일" ? (
+              <div className="stylesBox">
+                {defaultSettingStyles.map(styleElem => {
+                  return (
+                    <div
+                      onClick={toggleSelectedStyles}
+                      className={
+                        selectedStyles.includes(styleElem) ? "selected" : ""
+                      }
+                    >
+                      {styleElem}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              ""
+            )}
+            {selectedFilterElement === "소재" ? (
+              <div className="ingredientsBox">
+                {defaultSettingIngredients.map(ingredientElem => {
+                  return (
+                    <div
+                      onClick={toggleSelectedIngredients}
+                      className={
+                        selectedIngredients.includes(ingredientElem)
+                          ? "selected"
+                          : ""
+                      }
+                    >
+                      {ingredientElem}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              ""
+            )}
+
             <div className="footer">
               <Button variant="contained" color="primary">
                 Primary
