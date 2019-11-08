@@ -244,7 +244,11 @@ export default function Filtered(props) {
         );
       })}
       {showModal ? (
-        <div className="filterModal" onClick={() => toggleModal(!showModal)}>
+        <div className="filterModal">
+          <div
+            className="modalBackground"
+            onClick={() => toggleModal(!showModal)}
+          ></div>
           <div className="filterItemBox">
             <div className="nav">
               <div>가격</div>
