@@ -175,9 +175,10 @@ export default function Filtered(props) {
   let classes = useStyles();
   const [showModal, toggleModal] = useState(false);
   const [value, setValue] = useState([1000, 15000]);
-  const [selectedFilterElement, changeFilterElement] = useState("");
+  const [selectedModalContent, changeModalContent] = useState("");
   const [selectedStyles, setSelectStyles] = useState([]);
   const [selectedIngredients, setSelectIngredients] = useState([]);
+  const [orderMethod, setOrderMethod] = useState("신상품순");
 
   const toggleSelectedStyles = ev => {
     let elemName = ev.currentTarget.textContent;
@@ -204,14 +205,23 @@ export default function Filtered(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const selectedFilter = ev => {
-    let selectedFilterElement = ev.currentTarget.textContent;
+  const orderBy = ev => {
+    let selectedModalContent = "정렬";
     toggleModal(!showModal);
-    changeFilterElement(selectedFilterElement);
+    changeModalContent(selectedModalContent);
+  };
+  const orderByInModal = ev => {
+    let selectedModalContent = "정렬";
+    changeModalContent(selectedModalContent);
+  };
+  const selectedFilter = ev => {
+    let selectedModalContent = ev.currentTarget.textContent;
+    toggleModal(!showModal);
+    changeModalContent(selectedModalContent);
   };
   const selectedFilterInModal = ev => {
-    let selectedFilterElement = ev.currentTarget.textContent;
-    changeFilterElement(selectedFilterElement);
+    let selectedModalContent = ev.currentTarget.textContent;
+    changeModalContent(selectedModalContent);
   };
   return (
     <div className="Home">
@@ -241,10 +251,7 @@ export default function Filtered(props) {
           <div onClick={selectedFilter}>소재</div>
         </div>
         <div className="orderBox">
-          <IconButton
-            onClick={() => toggleModal(!showModal)}
-            className={classes.button}
-          >
+          <IconButton onClick={orderBy} className="orderBtn">
             <FilterListIcon />
           </IconButton>
         </div>
@@ -304,26 +311,38 @@ export default function Filtered(props) {
           ></div>
           <div className="filterItemBox">
             <div className="nav">
-              <div
-                className={selectedFilterElement === "가격" ? "selected" : ""}
-                onClick={selectedFilterInModal}
-              >
-                가격
+              <div className="filterList">
+                <div
+                  className={selectedModalContent === "가격" ? "selected" : ""}
+                  onClick={selectedFilterInModal}
+                >
+                  가격
+                </div>
+                <div
+                  className={
+                    selectedModalContent === "스타일" ? "selected" : ""
+                  }
+                  onClick={selectedFilterInModal}
+                >
+                  스타일
+                </div>
+                <div
+                  className={selectedModalContent === "소재" ? "selected" : ""}
+                  onClick={selectedFilterInModal}
+                >
+                  소재
+                </div>
               </div>
-              <div
-                className={selectedFilterElement === "스타일" ? "selected" : ""}
-                onClick={selectedFilterInModal}
+              <IconButton
+                onClick={orderByInModal}
+                className={`orderBtn ${
+                  selectedModalContent === "정렬" ? "selected" : ""
+                }`}
               >
-                스타일
-              </div>
-              <div
-                className={selectedFilterElement === "소재" ? "selected" : ""}
-                onClick={selectedFilterInModal}
-              >
-                소재
-              </div>
+                <FilterListIcon />
+              </IconButton>
             </div>
-            {selectedFilterElement === "가격" ? (
+            {selectedModalContent === "가격" ? (
               <div className="valueSliderBox">
                 <div className="displayValue">
                   {value[0]} ~ {value[1]}
@@ -343,7 +362,7 @@ export default function Filtered(props) {
             ) : (
               ""
             )}
-            {selectedFilterElement === "스타일" ? (
+            {selectedModalContent === "스타일" ? (
               <div className="stylesBox">
                 {defaultSettingStyles.map(styleElem => {
                   return (
@@ -361,7 +380,7 @@ export default function Filtered(props) {
             ) : (
               ""
             )}
-            {selectedFilterElement === "소재" ? (
+            {selectedModalContent === "소재" ? (
               <div className="ingredientsBox">
                 {defaultSettingIngredients.map(ingredientElem => {
                   return (
@@ -377,6 +396,40 @@ export default function Filtered(props) {
                     </div>
                   );
                 })}
+              </div>
+            ) : (
+              ""
+            )}
+            {selectedModalContent === "정렬" ? (
+              <div className="orderBox">
+                <div
+                  onClick={ev => {
+                    setOrderMethod(ev.currentTarget.textContent);
+                  }}
+                >
+                  신상품순
+                </div>
+                <div
+                  onClick={ev => {
+                    setOrderMethod(ev.currentTarget.textContent);
+                  }}
+                >
+                  고가순
+                </div>
+                <div
+                  onClick={ev => {
+                    setOrderMethod(ev.currentTarget.textContent);
+                  }}
+                >
+                  저가순
+                </div>
+                <div
+                  onClick={ev => {
+                    setOrderMethod(ev.currentTarget.textContent);
+                  }}
+                >
+                  이름순
+                </div>
               </div>
             ) : (
               ""
