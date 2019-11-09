@@ -84,10 +84,10 @@ const useStyles = makeStyles({
   },
   goToShop: {
     color: "#ffffffdb",
-    background: "#ff5fab"
+    background: "#edb6b6"
   },
   fitIt: {
-    background: "#ef70b1b3"
+    background: "#EDB6C1"
   }
 });
 

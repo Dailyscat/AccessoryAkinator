@@ -10,7 +10,7 @@
   .MuiPaper-root.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary {
     width: 80%;
     margin: 0 auto;
-    background-color: #ffe1f8ad;
+    background-color: #da67677a;
   }
   .searchBox {
     display: flex;
@@ -26,7 +26,7 @@
     justify-content: space-between;
     align-items: stretch;
     margin-top: 20px;
-    background-color: #f7eaf4;
+    background-color: #edb6b64f;
     .filterStandardBox {
       display: flex;
       flex-direction: row;
@@ -157,6 +157,7 @@
         max-height: 80px;
         overflow-y: scroll;
         width: 40%;
+        border-radius: 20px;
         div {
           font-size: 20px;
           border-top: solid 3px pink;
