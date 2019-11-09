@@ -14,8 +14,9 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import ListEarring from "../queries/ListEarring";
+import { graphql, compose } from "react-apollo";
 
-// import earrings from "../../db";
 let earrings = [
   {
     shopName: "wing bling",
@@ -148,10 +149,6 @@ const styles = theme => ({
   }
 });
 
-function valuetext(value) {
-  return `${value}°C`;
-}
-
 let defaultSettingStyles = [
   "순수",
   "우아",
@@ -172,7 +169,7 @@ let defaultSettingIngredients = [
 ];
 let defaultSettingOrders = ["신상품순", "고가순", "저가순", "이름순"];
 
-export default function Filtered(props) {
+function Filtered(props) {
   let classes = useStyles();
   const [showModal, toggleModal] = useState(false);
   const [value, setValue] = useState([1000, 15000]);
@@ -257,53 +254,56 @@ export default function Filtered(props) {
           </IconButton>
         </div>
       </div>
-      {earrings.map(cur => {
-        return (
-          <div className="earringItem">
-            <div className="earringInfo">
-              <img src={cur.earringThumbnailUrl} />
-              <div className="text">
-                <div className="name">{cur.earringName}</div>
-                <div>
-                  {cur.earringStyle.map(cur => (
-                    <span>{cur}</span>
-                  ))}
+      {console.log(props.earringProducts)}
+      {props.earringProducts.length > 0
+        ? props.earringProducts.map(cur => {
+            return (
+              <div className="earringItem">
+                <div className="earringInfo">
+                  <img src={cur.earringThumbnailUrl} />
+                  <div className="text">
+                    <div className="name">{cur.earringName}</div>
+                    <div>
+                      {cur.earringStyle.map(cur => (
+                        <span>{cur}</span>
+                      ))}
+                    </div>
+                    <div>{cur.earringElement}</div>
+                    <div>{cur.earringPrice}</div>
+                    <div>
+                      {cur.color.map(cur => (
+                        <span>{cur}</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div>{cur.earringElement}</div>
-                <div>{cur.earringPrice}</div>
-                <div>
-                  {cur.color.map(cur => (
-                    <span>{cur}</span>
-                  ))}
+                <div className="btnBox">
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={classes.goToShop}
+                    href={cur.shopUrl}
+                    startIcon={<StorefrontIcon />}
+                  >
+                    보러가기
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={classes.fitIt}
+                    startIcon={<MoodIcon />}
+                    onClick={() => {
+                      props.fitIt();
+                      window.location.href = "/fitAR";
+                    }}
+                  >
+                    착용하기
+                  </Button>
                 </div>
               </div>
-            </div>
-            <div className="btnBox">
-              <Button
-                variant="contained"
-                color="default"
-                className={classes.goToShop}
-                href={cur.shopUrl}
-                startIcon={<StorefrontIcon />}
-              >
-                보러가기
-              </Button>
-              <Button
-                variant="contained"
-                color="default"
-                className={classes.fitIt}
-                startIcon={<MoodIcon />}
-                onClick={() => {
-                  props.fitIt();
-                  window.location.href = "/fitAR";
-                }}
-              >
-                착용하기
-              </Button>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })
+        : ""}
       {showModal ? (
         <div className="filterModal">
           <div
@@ -357,7 +357,6 @@ export default function Filtered(props) {
                   onChange={handleChange}
                   valueLabelDisplay="auto"
                   aria-labelledby="range-slider"
-                  getAriaValueText={valuetext}
                 />
               </div>
             ) : (
@@ -433,3 +432,14 @@ export default function Filtered(props) {
     </div>
   );
 }
+
+export default graphql(ListEarring, {
+  options: {
+    fetchPolicy: "cache-and-network"
+  },
+  props: props => ({
+    earringProducts: props.data.listEarringProducts
+      ? props.data.listEarringProducts.items
+      : earrings
+  })
+})(Filtered);

@@ -1,13 +1,17 @@
 import gql from "graphql-tag";
 
 export default gql`
-  query listEarring {
-    listEarring {
+  query listEarringProducts {
+    listEarringProducts {
       items {
         earringName
-        ingredients
-        sytles
-        price
+        earringElement
+        earringStyle
+        earringThumbnailUrl
+        earringRemovedBgImg
+        color
+        shopName
+        shopUrl
       }
     }
   }

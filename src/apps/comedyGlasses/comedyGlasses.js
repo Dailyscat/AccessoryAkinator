@@ -256,7 +256,7 @@ export function initApp(videoSetting) {
         );
         MOVEMENT.position.set(
           -x - 0.2,
-          -y + SETTsINGS.pivotOffsetYZ[0],
+          -y + SETTINGS.pivotOffsetYZ[0],
           z + SETTINGS.pivotOffsetYZ[1]
         );
         MOVEMENT.pivotOffset
