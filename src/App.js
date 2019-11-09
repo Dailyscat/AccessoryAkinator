@@ -45,7 +45,11 @@ class App extends Component {
           path="/"
           render={() => <Homes {...this.props} fitIt={this.fitIt} />}
         />
-        <Route path="/filtered" {...this.props} render={() => <Filtered />} />
+        <Route
+          path="/filtered"
+          {...this.props}
+          render={() => <Filtered fitIt={this.fitIt} />}
+        />
         <Route path="/fitAR" {...this.props} render={() => <FitAr />} />
         <BottomNavigation
           value={this.state.bottomNavState}

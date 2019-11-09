@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "./fitar.scss";
-import { initApp, shutdownVideo } from "../apps/comedyGlasses/comedyGlasses";
+import {
+  initApp,
+  shutdownVideo,
+  videoSetting
+} from "../apps/comedyGlasses/comedyGlasses";
 export default class FitAr extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +14,8 @@ export default class FitAr extends Component {
   }
 
   componentDidMount() {
-    initApp();
+    videoSetting();
+    // initApp();
   }
 
   componentWillUnmount() {

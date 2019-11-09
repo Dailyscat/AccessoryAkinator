@@ -1,4 +1,5 @@
 import JEEFACEFILTERAPI from "../../dist/jeelizFacePatched";
+import JeelizResizer from "../../helpers/JeelizResizer";
 import THREE from "../../libs/threejs/matrix/THREEMatrix";
 import "./comedyGlasses.css";
 
@@ -14,7 +15,7 @@ var SETTINGS = {
   mouthOpeningThreshold: 0.5, //sensibility of mouth opening, between 0 and 1
   mouthOpeningHysteresis: 0.05,
   scale: [1.3, 1.3], //scale of the DIV along horizontal and vertical axis
-  positionOffset: [0.1, -0.6, -0.2] //set a 3D position fofset to the div
+  positionOffset: [0.3, -1.0, -0.2] //set a 3D position fofset to the div
 };
 
 //some globalz :
@@ -186,7 +187,7 @@ function init_scene(spec) {
 } //end init_scene()
 
 //launched by body.onload() :
-export function initApp() {
+export function initApp(videoSetting) {
   DIV = document.getElementById("jeelizFaceFilterFollow");
   if (!DIV) {
     alert(
@@ -309,4 +310,13 @@ export function initApp() {
 
 export function shutdownVideo() {
   JEEFACEFILTERAPI.toggle_pause(true, true);
+}
+
+export function videoSetting() {
+  JeelizResizer.size_canvas({
+    canvasId: "jeeFaceFilterCanvas",
+    callback: function(isError, bestVideoSettings) {
+      initApp(bestVideoSettings);
+    }
+  });
 }
