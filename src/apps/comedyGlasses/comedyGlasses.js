@@ -254,10 +254,9 @@ export function initApp(videoSetting) {
           detectState.rz,
           "XYZ"
         );
-
         MOVEMENT.position.set(
-          -x,
-          -y + SETTINGS.pivotOffsetYZ[0],
+          -x - 0.2,
+          -y + SETTsINGS.pivotOffsetYZ[0],
           z + SETTINGS.pivotOffsetYZ[1]
         );
         MOVEMENT.pivotOffset
@@ -274,28 +273,6 @@ export function initApp(videoSetting) {
 
         //apply the matrix to the DIV
         apply_matrix(MOVEMENT.matrix, DIV);
-
-        //detects mouth opening
-        var mouthOpening = detectState.expressions[0];
-        if (
-          ISMOUTHOPENED &&
-          mouthOpening <
-            SETTINGS.mouthOpeningThreshold - SETTINGS.mouthOpeningHysteresis
-        ) {
-          //user closes mouth
-          removeClass(DIV, "mouthOpened");
-          addClass(DIV, "mouthClosed");
-          ISMOUTHOPENED = false;
-        } else if (
-          !ISMOUTHOPENED &&
-          mouthOpening >
-            SETTINGS.mouthOpeningThreshold + SETTINGS.mouthOpeningHysteresis
-        ) {
-          //user opens mouth
-          removeClass(DIV, "mouthClosed");
-          addClass(DIV, "mouthOpened");
-          ISMOUTHOPENED = true;
-        }
       } //end if user detected
 
       GL.useProgram(VIDEOSCREENSHADERPROGRAM);
