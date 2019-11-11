@@ -259,7 +259,6 @@ function Filtered(props) {
       }
     }
     if (orderMethod) {
-      console.log(orderMethod);
       switch (orderMethod) {
         case "신상품순":
           break;
