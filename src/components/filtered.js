@@ -315,6 +315,20 @@ function Filtered(props) {
     let selectedModalContent = ev.currentTarget.textContent;
     changeModalContent(selectedModalContent);
   };
+  const onSearch = ev => {
+    let word = ev.currentTarget.value;
+    let copyEarringProducts = [...props.earringProducts];
+    copyEarringProducts = copyEarringProducts.filter(cur => {
+      if (cur.earringName.includes(word)) {
+        return true;
+      }
+    });
+    setOrderMethod("신상품순");
+    setSelectIngredients([]);
+    setSelectStyles([]);
+    toggleModal(false);
+    setEarringProduct(copyEarringProducts);
+  };
   return (
     <div className="Home">
       <div className={classes.root}>
@@ -327,6 +341,7 @@ function Filtered(props) {
               </div>
               <InputBase
                 placeholder="Search…"
+                onChange={onSearch}
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput
