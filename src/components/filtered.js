@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./filtered.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -177,6 +177,16 @@ function Filtered(props) {
   const [selectedStyles, setSelectStyles] = useState([]);
   const [selectedIngredients, setSelectIngredients] = useState([]);
   const [orderMethod, setOrderMethod] = useState("신상품순");
+  const [earringProducts, setEarringProduct] = useState([]);
+  const [filteredEarringProducts, setFilteredEarringProducts] = useState([]);
+  const [usePriceRangeFilter, setBoolUsePriceRangeFilter] = useState(false);
+  const [useElementFilter, setBoolUseElementFilter] = useState(false);
+  const [useStyleFilter, setBoolUseStyleFilter] = useState(false);
+
+  useEffect(() => {
+    setEarringProduct(props.earringProducts);
+    setFilteredEarringProducts(props.earringProducts);
+  }, [props.earringProducts]);
 
   const toggleSelectedStyles = ev => {
     let elemName = ev.currentTarget.textContent;
@@ -188,6 +198,7 @@ function Filtered(props) {
       copySelectedStyles.push(elemName);
     }
     setSelectStyles(copySelectedStyles);
+    setBoolUseStyleFilter(true);
   };
   const toggleSelectedIngredients = ev => {
     let elemName = ev.currentTarget.textContent;
@@ -199,9 +210,87 @@ function Filtered(props) {
       copySelectedIngredients.push(elemName);
     }
     setSelectIngredients(copySelectedIngredients);
+    setBoolUseElementFilter(true);
   };
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setBoolUsePriceRangeFilter(true);
+  };
+
+  useEffect(() => {
+    checkFilter(value, selectedIngredients, selectedStyles);
+  }, [value[0], value[1], selectedIngredients, selectedStyles, orderMethod]);
+
+  const checkFilter = (value, selectedIngredients, selectedStyles) => {
+    let filteredEarringProducts = [...earringProducts];
+    if (usePriceRangeFilter) {
+      filteredEarringProducts = filteredEarringProducts.filter((cur, idx) => {
+        if (value[0] <= cur.earringPrice && value[1] >= cur.earringPrice) {
+          return true;
+        }
+      });
+    }
+    if (useElementFilter) {
+      if (selectedIngredients.length > 0) {
+        filteredEarringProducts = filteredEarringProducts.filter((cur, idx) => {
+          let isSelected = selectedIngredients.filter(selectedCur => {
+            if (cur.earringElement.includes(selectedCur)) {
+              return true;
+            }
+          });
+          if (isSelected.length > 0) {
+            return true;
+          }
+        });
+      }
+    }
+    if (useStyleFilter) {
+      if (selectedStyles.length > 0) {
+        filteredEarringProducts = filteredEarringProducts.filter((cur, idx) => {
+          let isSelected = selectedStyles.filter(selectedCur => {
+            if (cur.earringStyle.includes(selectedCur)) {
+              return true;
+            }
+          });
+          if (isSelected.length > 0) {
+            return true;
+          }
+        });
+      }
+    }
+    if (orderMethod) {
+      console.log(orderMethod);
+      switch (orderMethod) {
+        case "신상품순":
+          break;
+        case "고가순":
+          filteredEarringProducts.sort((a, b) => {
+            if (a.earringPrice < b.earringPrice) {
+              return -1;
+            }
+          });
+          break;
+        case "저가순":
+          filteredEarringProducts.sort((a, b) => {
+            if (a.earringPrice > b.earringPrice) {
+              return 1;
+            }
+          });
+          break;
+        case "이름순":
+          filteredEarringProducts.sort((a, b) => {
+            if (a.earringName > b.earringName) {
+              return 1;
+            }
+          });
+      }
+    }
+    setFilteredEarringProducts(filteredEarringProducts);
+  };
+
+  const showFilteredList = () => {
+    setEarringProduct(filteredEarringProducts);
+    toggleModal(false);
   };
   const orderBy = ev => {
     let selectedModalContent = "정렬";
@@ -254,9 +343,8 @@ function Filtered(props) {
           </IconButton>
         </div>
       </div>
-      {console.log(props.earringProducts)}
-      {props.earringProducts.length > 0
-        ? props.earringProducts.map(cur => {
+      {earringProducts.length > 0
+        ? earringProducts.map(cur => {
             return (
               <div className="earringItem">
                 <div className="earringInfo">
@@ -420,8 +508,12 @@ function Filtered(props) {
             )}
 
             <div className="footer">
-              <Button variant="contained" color="primary">
-                Primary
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={showFilteredList}
+              >
+                {filteredEarringProducts.length}개 제품 보러 가기
               </Button>
             </div>
           </div>

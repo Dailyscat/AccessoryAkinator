@@ -7,6 +7,7 @@ export default gql`
         earringName
         earringElement
         earringStyle
+        earringPrice
         earringThumbnailUrl
         earringRemovedBgImg
         color
