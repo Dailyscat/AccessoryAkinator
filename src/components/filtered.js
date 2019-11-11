@@ -288,6 +288,12 @@ function Filtered(props) {
     setFilteredEarringProducts(filteredEarringProducts);
   };
 
+  const removeFiltered = () => {
+    setOrderMethod("신상품순");
+    setSelectIngredients([]);
+    setSelectStyles([]);
+    setEarringProduct(props.earringProducts);
+  };
   const showFilteredList = () => {
     setEarringProduct(filteredEarringProducts);
     toggleModal(false);
@@ -343,6 +349,13 @@ function Filtered(props) {
           </IconButton>
         </div>
       </div>
+      {selectedIngredients.length > 0 || selectedStyles > 0 ? (
+        <div className="removeFilter" onClick={removeFiltered}>
+          전체보기
+        </div>
+      ) : (
+        ""
+      )}
       {earringProducts.length > 0
         ? earringProducts.map(cur => {
             return (

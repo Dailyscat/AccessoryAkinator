@@ -19,6 +19,17 @@
     justify-content: space-around;
     align-items: center;
   }
+  .removeFilter {
+    text-align: center;
+    width: 93px;
+    height: 30px;
+    margin: 10px auto;
+    background: #edb6b6;
+    border-radius: 12px;
+    color: #ffffff;
+    font-weight: bold;
+    line-height: 35px;
+  }
   .filterNav {
     display: flex;
     flex-direction: row;
@@ -27,6 +38,7 @@
     align-items: stretch;
     margin-top: 20px;
     background-color: #edb6b64f;
+
     .filterStandardBox {
       display: flex;
       flex-direction: row;
@@ -38,6 +50,7 @@
   }
 
   .earringItem {
+    margin-top: 20px;
     margin-bottom: 20px;
     .earringInfo {
       display: flex;
