@@ -94,7 +94,7 @@ export default function Homes(props) {
                   ))}
                 </div>
                 <div>{cur.earringElement}</div>
-                <div>{cur.earringPrice}</div>
+                <div>{cur.earringPrice}원</div>
                 <div>
                   {cur.color.map(cur => (
                     <span>{cur}</span>

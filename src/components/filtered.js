@@ -380,14 +380,14 @@ function Filtered(props) {
                     <div className="name">{cur.earringName}</div>
                     <div>
                       {cur.earringStyle.map(cur => (
-                        <span>{cur}</span>
+                        <span>{cur} </span>
                       ))}
                     </div>
                     <div>{cur.earringElement}</div>
-                    <div>{cur.earringPrice}</div>
+                    <div>{cur.earringPrice}원</div>
                     <div>
                       {cur.color.map(cur => (
-                        <span>{cur}</span>
+                        <span>{cur} </span>
                       ))}
                     </div>
                   </div>
