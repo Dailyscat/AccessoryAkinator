@@ -409,7 +409,9 @@ function Filtered(props) {
                     startIcon={<MoodIcon />}
                     onClick={() => {
                       props.fitIt();
-                      window.location.href = "/fitAR";
+                      props.history.push("/fitAR", {
+                        earringImage: cur.earringRemovedBgImg
+                      });
                     }}
                   >
                     착용하기

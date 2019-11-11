@@ -2,7 +2,6 @@
   display: block;
   position: absolute;
   z-index: 1000;
-  background-image: url("comedy-glasses.png");
   background-size: contain;
   background-repeat: no-repeat;
   height: auto;

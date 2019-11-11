@@ -127,7 +127,9 @@ function Homes(props) {
                     startIcon={<MoodIcon />}
                     onClick={() => {
                       props.fitIt();
-                      props.history.push("/fitAR");
+                      props.history.push("/fitAR", {
+                        earringImage: cur.earringRemovedBgImg
+                      });
                     }}
                   >
                     착용하기

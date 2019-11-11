@@ -50,7 +50,7 @@ class App extends Component {
           {...this.props}
           render={() => <Filtered fitIt={this.fitIt} />}
         />
-        <Route path="/fitAR" {...this.props} render={() => <FitAr />} />
+        <Route path="/fitAR" render={() => <FitAr {...this.props} />} />
         <BottomNavigation
           value={this.state.bottomNavState}
           onChange={(event, newValue) => {
