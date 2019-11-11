@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./homes.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import MoodIcon from "@material-ui/icons/Mood";
+import ListEarring from "../queries/ListEarring";
+import { graphql, compose } from "react-apollo";
 
 // import earrings from "../../db";
 let earrings = [
@@ -77,57 +79,74 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Homes(props) {
+function Homes(props) {
   let classes = useStyles();
+  const [earringProducts, setEarringProduct] = useState([]);
+  useEffect(() => {
+    setEarringProduct(props.earringProducts);
+  }, [props.earringProducts]);
+
   return (
     <div className="Home">
-      {earrings.map(cur => {
-        return (
-          <div className="earringItem">
-            <div className="earringInfo">
-              <img src={cur.earringThumbnailUrl} />
-              <div className="text">
-                <div className="name">{cur.earringName}</div>
-                <div>
-                  {cur.earringStyle.map(cur => (
-                    <span>{cur}</span>
-                  ))}
+      {earringProducts.length > 0
+        ? earringProducts.map(cur => {
+            return (
+              <div className="earringItem">
+                <div className="earringInfo">
+                  <img src={cur.earringThumbnailUrl} />
+                  <div className="text">
+                    <div className="name">{cur.earringName}</div>
+                    <div>
+                      {cur.earringStyle.map(cur => (
+                        <span>{cur}</span>
+                      ))}
+                    </div>
+                    <div>{cur.earringElement}</div>
+                    <div>{cur.earringPrice}원</div>
+                    <div>
+                      {cur.color.map(cur => (
+                        <span>{cur}</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div>{cur.earringElement}</div>
-                <div>{cur.earringPrice}원</div>
-                <div>
-                  {cur.color.map(cur => (
-                    <span>{cur}</span>
-                  ))}
+                <div className="btnBox">
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={classes.goToShop}
+                    href={cur.shopUrl}
+                    startIcon={<StorefrontIcon />}
+                  >
+                    보러가기
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={classes.fitIt}
+                    startIcon={<MoodIcon />}
+                    onClick={() => {
+                      props.fitIt();
+                      props.history.push("/fitAR");
+                    }}
+                  >
+                    착용하기
+                  </Button>
                 </div>
               </div>
-            </div>
-            <div className="btnBox">
-              <Button
-                variant="contained"
-                color="default"
-                className={classes.goToShop}
-                href={cur.shopUrl}
-                startIcon={<StorefrontIcon />}
-              >
-                보러가기
-              </Button>
-              <Button
-                variant="contained"
-                color="default"
-                className={classes.fitIt}
-                startIcon={<MoodIcon />}
-                onClick={() => {
-                  props.fitIt();
-                  props.history.push("/fitAR");
-                }}
-              >
-                착용하기
-              </Button>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })
+        : ""}
     </div>
   );
 }
+export default graphql(ListEarring, {
+  options: {
+    fetchPolicy: "cache-and-network"
+  },
+  props: props => ({
+    earringProducts: props.data.listEarringProducts
+      ? props.data.listEarringProducts.items
+      : earrings
+  })
+})(Homes);
