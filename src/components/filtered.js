@@ -11,11 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Slider from "@material-ui/core/Slider";
 import InputBase from "@material-ui/core/InputBase";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import { withStyles } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ListEarring from "../queries/ListEarring";
-import { graphql, compose } from "react-apollo";
+import { graphql } from "react-apollo";
 
 let earrings = [
   {

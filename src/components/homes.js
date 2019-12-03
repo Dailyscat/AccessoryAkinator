@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import MoodIcon from "@material-ui/icons/Mood";
 import ListEarring from "../queries/ListEarring";
-import { graphql, compose } from "react-apollo";
+import { graphql } from "react-apollo";
 
 // import earrings from "../../db";
 let earrings = [

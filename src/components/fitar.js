@@ -1,23 +1,22 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import "./fitar.scss";
 import {
   shutdownVideo,
   videoSetting
 } from "../apps/comedyGlasses/comedyGlasses";
 
-export default FitAr (props) {
-
+export default function FitAr(props) {
   useEffect(() => {
     //didmount
     videoSetting();
-  },[])
+  }, []);
 
   useEffect(() => {
     //unmount
     return () => {
       shutdownVideo();
     };
-  }, [])
+  }, []);
 
   return (
     <div className="FitAr">
@@ -34,25 +33,4 @@ export default FitAr (props) {
       </div>
     </div>
   );
-
 }
-// export default class FitAr extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       fitItOn: false
-//     };
-//   }
-
-//   componentDidMount() {
-//     videoSetting();
-//   }
-
-//   componentWillUnmount() {
-//     shutdownVideo();
-//   }
-
-//   render() {
-
-//   }
-// }
