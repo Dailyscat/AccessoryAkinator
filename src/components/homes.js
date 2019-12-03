@@ -82,6 +82,7 @@ const useStyles = makeStyles({
 function Homes(props) {
   let classes = useStyles();
   const [earringProducts, setEarringProduct] = useState([]);
+
   useEffect(() => {
     setEarringProduct(props.earringProducts);
   }, [props.earringProducts]);

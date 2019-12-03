@@ -200,6 +200,7 @@ function Filtered(props) {
     setSelectStyles(copySelectedStyles);
     setBoolUseStyleFilter(true);
   };
+
   const toggleSelectedIngredients = ev => {
     let elemName = ev.currentTarget.textContent;
     let copySelectedIngredients = [...selectedIngredients];
@@ -212,6 +213,7 @@ function Filtered(props) {
     setSelectIngredients(copySelectedIngredients);
     setBoolUseElementFilter(true);
   };
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setBoolUsePriceRangeFilter(true);
@@ -293,28 +295,34 @@ function Filtered(props) {
     setSelectStyles([]);
     setEarringProduct(props.earringProducts);
   };
+
   const showFilteredList = () => {
     setEarringProduct(filteredEarringProducts);
     toggleModal(false);
   };
+
   const orderBy = ev => {
     let selectedModalContent = "정렬";
     toggleModal(!showModal);
     changeModalContent(selectedModalContent);
   };
+
   const orderByInModal = ev => {
     let selectedModalContent = "정렬";
     changeModalContent(selectedModalContent);
   };
+
   const selectedFilter = ev => {
     let selectedModalContent = ev.currentTarget.textContent;
     toggleModal(!showModal);
     changeModalContent(selectedModalContent);
   };
+
   const selectedFilterInModal = ev => {
     let selectedModalContent = ev.currentTarget.textContent;
     changeModalContent(selectedModalContent);
   };
+
   const onSearch = ev => {
     let word = ev.currentTarget.value;
     let copyEarringProducts = [...props.earringProducts];
@@ -329,6 +337,7 @@ function Filtered(props) {
     toggleModal(false);
     setEarringProduct(copyEarringProducts);
   };
+
   return (
     <div className="Home">
       <div className={classes.root}>
