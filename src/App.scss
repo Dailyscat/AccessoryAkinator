@@ -1,4 +1,5 @@
 .App {
+  display: block;
   .header {
     color: #00000096;
     background-image: radial-gradient(
@@ -29,5 +30,17 @@
   }
   .MuiBottomNavigationAction-root.Mui-selected {
     color: #fb8080;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  body {
+    background: url("./mobileOnly.png");
+    background-repeat: no-repeat !important;
+    background-attachment: inherit !important;
+    height: 700px;
+    .App {
+      display: none;
+    }
   }
 }
