@@ -1,7 +1,6 @@
 # Accessory Akinator
 
 <img src="./AACapture.jpg"/>
-<img src="./AAArchitecture.jpg">
 
 Accessory Akinator는 귀걸이 AR 가상착용 플랫폼입니다.
 
@@ -37,7 +36,9 @@ npm start
 
 ## Server-Side
 
-- AWS AppSync, S3, DynamoDB, Lambda, CloudFront
+- AWS AppSync, S3, DynamoDB, Lambda, CloudFront를 활용한 Serverless Application
+
+<img src="./AAArchitecture.png">
 
 ## Continuous Integration
 
