@@ -1,6 +1,7 @@
 # Accessory Akinator
 
-<img width="300" src="./AACapture.jpg"/>
+<img width="300" src="./AACapture1.jpg"/>
+<img width="300" src="./AACapture2.jpg"/>
 
 Accessory Akinator는 귀걸이 AR 가상착용 플랫폼입니다.
 
