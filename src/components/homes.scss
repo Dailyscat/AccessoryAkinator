@@ -31,6 +31,15 @@
       flex-wrap: nowrap;
       justify-content: space-around;
       align-items: center;
+
+      a,
+      button {
+        position: unset;
+        &:hover {
+          color: white;
+          background-color: #f19c9c;
+        }
+      }
     }
   }
 }
