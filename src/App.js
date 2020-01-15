@@ -48,7 +48,7 @@ class App extends Component {
         <Route
           path="/filtered"
           {...this.props}
-          render={() => <Filtered fitIt={this.fitIt} />}
+          render={() => <Filtered {...this.props} fitIt={this.fitIt} />}
         />
         <Route path="/fitAR" render={() => <FitAr {...this.props} />} />
         <BottomNavigation

@@ -27,7 +27,7 @@ export default function FitAr(props) {
           height="300"
           id="jeelizFaceFilterFollow"
           style={{
-            backgroundImage: `url(${this.props.location.state.earringImage})`
+            backgroundImage: `url(${props.location.state.earringImage})`
           }}
         ></div>
       </div>
