@@ -286,6 +286,7 @@ export function initApp(videoSetting) {
 } //end main()
 
 export function shutdownVideo() {
+  JEEFACEFILTERAPI.set_scanSettings({ nDetectsPerLoop: 0 });
   JEEFACEFILTERAPI.toggle_pause(true, true);
 }
 

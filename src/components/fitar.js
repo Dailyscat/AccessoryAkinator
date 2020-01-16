@@ -14,7 +14,7 @@ export default function FitAr(props) {
   useEffect(() => {
     //unmount
     return () => {
-      shutdownVideo();
+      window.location.reload();
     };
   }, []);
 
